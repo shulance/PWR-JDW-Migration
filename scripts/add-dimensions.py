@@ -13,12 +13,12 @@ pr_feed_parsed = parse(input_feed_pr)
 
 # You'll need build a dictionary which matches PWR data ids to BV data IDs.  You're looking for the 'key' value of the 'subrating' node in PWR feed, which will correspond to the appropriate ExternalId for the rating taken from the hub.  Use commented code below as example.  
 
-# dimensions = {
-#     "fit" : "Fit",
-#     "length" : "Length",
-#     "waist" : "Waist",
-#     "sleevelength" : "Sleevelength"
-# }
+dimensions = {
+    "fit" : "Fit",
+    "length" : "Length",
+    "waist" : "Waist",
+    "sleevelength" : "Sleevelength"
+}
 
 def append_text_node(parent,child_name,child_value):
     child_node = bv_feed_parsed.createElement(child_name)
@@ -44,13 +44,15 @@ for review in pr_feed_parsed.getElementsByTagName("fullreview"):
             tag = taggroup.getElementsByTagName("tag")[0]
             value = tag.childNodes[0].nodeValue
             name = str(taggroup.getAttribute("name"))
-
+            
             if value == "Feels too short":
                 mapped_subratings[review_id][name] = 1
             if value == "Feels true to length":
                 mapped_subratings[review_id][name] = 2
             if value == "Feels too long":
                 mapped_subratings[review_id][name] = 3
+            
+        print mapped_subratings[review_id]
 
 
         if taggroup.getAttribute("key") == 'insideleglength':
@@ -229,7 +231,7 @@ for review in bv_feed_parsed.getElementsByTagName("Review"):
     review_id = review.getAttribute('id').split('-')[1]
     RatingValues = bv_feed_parsed.createElement('RatingValues')
 
-    if mapped_subratings[review_id]['Length'] is not None:
+    for mapped_subratings[review_id]['Length'] in mapped_subratings[review_id]:
         rating_id = 'Length'
         rating_name = 'Length'
         rating_value = str(mapped_subratings[review_id]['Length'])
@@ -249,7 +251,7 @@ for review in bv_feed_parsed.getElementsByTagName("Review"):
 
         review.appendChild(RatingValues)
 
-    if mapped_subratings[review_id]['Inside Leg Length'] is not None:
+    for mapped_subratings[review_id]['Inside Leg Length'] in mapped_subratings[review_id]:
         rating_id = 'Insideleglength'
         rating_name = 'Inside Leg Length'
         rating_value = str(mapped_subratings[review_id]['Inside Leg Length'])
@@ -269,7 +271,7 @@ for review in bv_feed_parsed.getElementsByTagName("Review"):
 
         review.appendChild(RatingValues)
 
-    if mapped_subratings[review_id]['Sleeve Length'] is not None:
+    for mapped_subratings[review_id]['Sleeve Length'] in mapped_subratings[review_id]:
         rating_id = 'Sleevelength'
         rating_name = 'Sleeve Length'
         rating_value = str(mapped_subratings[review_id]['Sleeve Length'])
@@ -289,7 +291,7 @@ for review in bv_feed_parsed.getElementsByTagName("Review"):
 
         review.appendChild(RatingValues)
 
-    if mapped_subratings[review_id]['Footwear Sizing'] is not None:
+    for mapped_subratings[review_id]['Footwear Sizing'] in mapped_subratings[review_id]:
         rating_id = 'Footwearsizing'
         rating_name = 'Footwear Sizing'
         rating_value = str(mapped_subratings[review_id]['Footwear Sizing'])
@@ -309,7 +311,7 @@ for review in bv_feed_parsed.getElementsByTagName("Review"):
 
         review.appendChild(RatingValues)
 
-    if mapped_subratings[review_id]['Shoe Sizing'] is not None:
+    for mapped_subratings[review_id]['Shoe Sizing'] in mapped_subratings[review_id]:
         rating_id = 'Shoesizing'
         rating_name = 'Shoe Sizing'
         rating_value = str(mapped_subratings[review_id]['Shoe Sizing'])
@@ -329,7 +331,7 @@ for review in bv_feed_parsed.getElementsByTagName("Review"):
 
         review.appendChild(RatingValues)
 
-    if mapped_subratings[review_id]['Sizing'] is not None:
+    for mapped_subratings[review_id]['Sizing'] in mapped_subratings[review_id]:
         rating_id = 'Sizing'
         rating_name = 'Sizing'
         rating_value = str(mapped_subratings[review_id]['Sizing'])
@@ -349,7 +351,7 @@ for review in bv_feed_parsed.getElementsByTagName("Review"):
 
         review.appendChild(RatingValues)
 
-    if mapped_subratings[review_id]['Half Sizing'] is not None:
+    for mapped_subratings[review_id]['Half Sizing'] in mapped_subratings[review_id]:
         rating_id = 'Halfsizing'
         rating_name = 'Half Sizing'
         rating_value = str(mapped_subratings[review_id]['Half Sizing'])
@@ -369,7 +371,7 @@ for review in bv_feed_parsed.getElementsByTagName("Review"):
 
         review.appendChild(RatingValues)
 
-    if mapped_subratings[review_id]['Bra Band Size'] is not None:
+    for mapped_subratings[review_id]['Bra Band Size'] in mapped_subratings[review_id]:
         rating_id = 'Brabandsize'
         rating_name = 'Bra Band Size'
         rating_value = str(mapped_subratings[review_id]['Bra Band Size'])
@@ -389,7 +391,7 @@ for review in bv_feed_parsed.getElementsByTagName("Review"):
 
         review.appendChild(RatingValues)
 
-    if mapped_subratings[review_id]['Waist'] is not None:
+    for mapped_subratings[review_id]['Waist'] in mapped_subratings[review_id]:
         rating_id = 'Waist'
         rating_name = 'Waist'
         rating_value = str(mapped_subratings[review_id]['Waist'])
@@ -409,7 +411,7 @@ for review in bv_feed_parsed.getElementsByTagName("Review"):
 
         review.appendChild(RatingValues)
 
-    if mapped_subratings[review_id]['Fit'] is not None:
+    for mapped_subratings[review_id]['Fit'] in mapped_subratings[review_id]:
         rating_id = 'Fit'
         rating_name = 'Fit'
         rating_value = str(mapped_subratings[review_id]['Fit'])
@@ -429,7 +431,7 @@ for review in bv_feed_parsed.getElementsByTagName("Review"):
 
         review.appendChild(RatingValues)
 
-    if mapped_subratings[review_id]['Shoe Width'] is not None:
+    for mapped_subratings[review_id]['Shoe Width'] in mapped_subratings[review_id]:
         rating_id = 'Shoewidth'
         rating_name = 'Shoe Width'
         rating_value = str(mapped_subratings[review_id]['Shoe Width'])
@@ -449,7 +451,7 @@ for review in bv_feed_parsed.getElementsByTagName("Review"):
 
         review.appendChild(RatingValues)
 
-    if mapped_subratings[review_id]['Width'] is not None:
+    for mapped_subratings[review_id]['Width'] in mapped_subratings[review_id]:
         rating_id = 'Width'
         rating_name = 'Width'
         rating_value = str(mapped_subratings[review_id]['Width'])
@@ -469,7 +471,7 @@ for review in bv_feed_parsed.getElementsByTagName("Review"):
 
         review.appendChild(RatingValues)
 
-    if mapped_subratings[review_id]['Bra Cup Fit'] is not None:
+    for mapped_subratings[review_id]['Bra Cup Fit'] in mapped_subratings[review_id]:
         rating_id = 'Bracupfit'
         rating_name = 'Bra Cup Fit'
         rating_value = str(mapped_subratings[review_id]['Bra Cup Fit'])

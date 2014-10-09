@@ -12,4 +12,8 @@ Replaced by:
 ```
 <ContextDataDimension id="DescribeYourself"><ExternalId>DescribeYourself</ExternalId><Label>Describe Yourself</Label></ContextDataDimension></ContextDataValue>
 ```
-5. hide questions in display... BestUse, DescribeYourself
+5. string replace
+    DescribeYourself - Describeyoursel
+    BestUse - Bestuse
+
+6. hide questions in display... BestUse, DescribeYourself
